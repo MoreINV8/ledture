@@ -29,112 +29,27 @@ import {
   X
 } from 'lucide-react';
 
-export type TransactionType = 'I' | 'E'; // 'I' = Income, 'E' = Expense
+import { INITIAL_CATEGORIES } from './constants';
+import { formatDateString, getDaysDifferenceFromToday, isWithin7DaysRule } from './utils';
+import type {
+  ActiveTab,
+  Category,
+  FilterLockStatus,
+  FilterType,
+  MonthlyDetail,
+  SummaryPeriod,
+  ToastMessage,
+  ToastType,
+  TopExpenseItem,
+  TooltipPos,
+  Transaction,
+  TransactionType,
+  User,
+  YearlyDetail,
+} from './types';
 
-export interface Category {
-  id: string;
-  label: string;
-  icon: string;
-  type: TransactionType;
-}
-
-export interface Transaction {
-  id: string;
-  amount: number;
-  type: TransactionType;
-  transactionDate: string; // YYYY-MM-DD
-  categoryId: string | null;
-  note: string | null;
-  createdAt: string;
-}
-
-export interface User {
-  id: string;
-  email: string;
-  isAuthenticated: boolean;
-  sessionExpires: string;
-}
-
-export type ToastType = 'success' | 'error' | 'warning';
-
-export interface ToastMessage {
-  text: string;
-  type: ToastType;
-}
-
-export type ActiveTab = 'quick' | 'list' | 'summary';
-export type SummaryPeriod = 'MONTH' | 'YEAR_MONTHS' | 'YEAR';
-export type FilterType = 'ALL' | TransactionType;
-export type FilterLockStatus = 'ALL' | 'EDITABLE' | 'LOCKED';
-
-export interface TopExpenseItem {
-  id: string;
-  label: string;
-  icon: string;
-  amount: number;
-  percentage?: string;
-}
-
-export interface YearlyDetail {
-  year: number;
-  income: number;
-  expense: number;
-  net: number;
-  topExpenses: TopExpenseItem[];
-}
-
-export interface MonthlyDetail {
-  monthKey: string;
-  monthName: string;
-  monthNum: number;
-  income: number;
-  expense: number;
-  net: number;
-  topExpenses: TopExpenseItem[];
-}
-
-export interface TooltipPos {
-  x: number;
-  y: number;
-}
-
-const INITIAL_CATEGORIES: Category[] = [
-  { id: 'cat-1', label: 'Food & Dining', icon: '🍔', type: 'E' },
-  { id: 'cat-2', label: 'Transportation', icon: '🚗', type: 'E' },
-  { id: 'cat-3', label: 'Shopping', icon: '🛍️', type: 'E' },
-  { id: 'cat-4', label: 'Bills & Utilities', icon: '💡', type: 'E' },
-  { id: 'cat-5', label: 'Entertainment', icon: '🎬', type: 'E' },
-  { id: 'cat-6', label: 'Healthcare', icon: '🩺', type: 'E' },
-  { id: 'cat-7', label: 'Salary', icon: '💼', type: 'I' },
-  { id: 'cat-8', label: 'Freelance & Side Business', icon: '💻', type: 'I' },
-  { id: 'cat-9', label: 'Investments & Dividends', icon: '📈', type: 'I' },
-  { id: 'cat-10', label: 'Gifts & Bonus', icon: '🎁', type: 'I' },
-];
-
-// Helper to format dates in local YYYY-MM-DD
-const formatDateString = (dateObj: Date | string): string => {
-  const d = new Date(dateObj);
-  const month = '' + (d.getMonth() + 1);
-  const day = '' + d.getDate();
-  const year = d.getFullYear();
-  return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
-};
-
-// Calculate difference in full calendar days between today and a target date
-const getDaysDifferenceFromToday = (targetDateStr: string): number => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const target = new Date(targetDateStr);
-  target.setHours(0, 0, 0, 0);
-  const diffTime = today.getTime() - target.getTime();
-  return Math.floor(diffTime / (1000 * 60 * 60 * 24));
-};
-
-// Check Ledture 7-Day Business Rule
-const isWithin7DaysRule = (targetDateStr: string): boolean => {
-  const daysAgo = getDaysDifferenceFromToday(targetDateStr);
-  return daysAgo <= 7 && daysAgo >= -365;
-};
+// Re-export shared types so consumers of this module keep the same API.
+export * from './types';
 
 const generateMockTransactions = (): Transaction[] => {
   const today = new Date();
@@ -315,7 +230,7 @@ export default function App(): React.ReactElement {
   // Filtering state
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filterType, setFilterType] = useState<FilterType>('ALL');
-  const [filterLockStatus, setFilterLockStatus] = useState<FilterLockStatus>('ALL');
+  const [filterLockStatus] = useState<FilterLockStatus>('ALL');
   const [filterCategory, setFilterCategory] = useState<string>('ALL');
 
   // Modal editing & delete confirmation states
