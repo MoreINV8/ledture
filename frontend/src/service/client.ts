@@ -60,6 +60,7 @@ const request = async <T>(path: string, options: RequestOptions = {}): Promise<T
 
   const init: RequestInit = {
     ...rest,
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       ...headers,

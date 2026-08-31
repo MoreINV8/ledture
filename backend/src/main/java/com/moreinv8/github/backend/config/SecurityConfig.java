@@ -8,26 +8,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
- * Development-friendly security configuration for the placeholder backend.
- *
- * <p>Spring Boot's starter-security would otherwise protect every endpoint with
- * HTTP Basic auth and a generated password, which the frontend cannot use.
- * This config:
- * <ul>
- *   <li>disables CSRF (stateless JSON API),</li>
- *   <li>permits all requests so the placeholder auth endpoints are reachable,</li>
- *   <li>enables CORS for the local Vite dev server / preview.</li>
- * </ul>
- *
- * <p>Note: transaction endpoints still resolve the user from the security
- * context, so they will respond {@code UNAUTHORIZED} until a real session/JWT
- * flow (or a dev-user fallback) is implemented.
+ * Session-based security for the React client.
  */
 @Configuration
 @EnableWebSecurity
@@ -38,11 +27,17 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .anyRequest().permitAll());
+                .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
+                .anyRequest().authenticated());
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

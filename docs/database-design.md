@@ -11,6 +11,7 @@ categories
 ────────────────────────────
 id              UUID PK
 label           VARCHAR(20) UNIQUE NOT NULL
+emoji           VARCHAR(32) NOT NULL DEFAULT '🏷️'
 
 
 transactions
@@ -32,6 +33,8 @@ type IN ('I', 'E')
 users.email UNIQUE
 
 categories.label UNIQUE
+
+categories.emoji NOT NULL
 
 user_id → users.id
 ON DELETE CASCADE

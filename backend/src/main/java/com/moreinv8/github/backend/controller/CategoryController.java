@@ -23,10 +23,12 @@ public class CategoryController {
     public static class CategoryResponse {
         public java.util.UUID id;
         public String label;
+        public String emoji;
         public static CategoryResponse from(Category c) {
             CategoryResponse r = new CategoryResponse();
             r.id = c.getId();
             r.label = c.getLabel();
+            r.emoji = c.getEmoji();
             return r;
         }
     }

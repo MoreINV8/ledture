@@ -1,11 +1,9 @@
-import { post } from './client';
+import { get, post } from './client';
 import type { AuthRequestDto } from './types';
 
 /**
  * Auth endpoints (`POST /api/auth/*`).
- * The backend is a placeholder: it returns plain string messages
- * ("REGISTERED", "LOGGED_IN", "LOGGED_OUT") and does not yet issue a
- * session/JWT, so these methods resolve to those strings.
+ * Authentication uses a server-side session carried by an HttpOnly cookie.
  */
 export const authService = {
   async register(email: string, password: string): Promise<string> {
@@ -20,5 +18,9 @@ export const authService = {
 
   async logout(): Promise<string> {
     return post<string>('/auth/logout');
+  },
+
+  async getSession(): Promise<{ email: string }> {
+    return get<{ email: string }>('/auth/session');
   },
 };

@@ -6,8 +6,8 @@ import type { CategoryDto } from './types';
 /** Category endpoints (`GET /api/categories`). */
 export const categoryService = {
   /**
-   * Fetch all categories, mapped from the backend `{ id, label }` DTOs
-   * into the UI `Category` shape (icon + type enriched on the frontend).
+   * Fetch all categories, using the backend emoji and enriching the response
+   * with the frontend's category transaction type metadata.
    */
   async listCategories(): Promise<Category[]> {
     const dtos = await get<CategoryDto[]>('/categories');

@@ -113,6 +113,17 @@ public class TransactionController {
         return ResponseEntity.ok(filtered.stream().map(DtoUtil::toResponse).toList());
     }
 
+    @GetMapping("/recent")
+    public ResponseEntity<?> listRecentTransactions(
+            @RequestParam(defaultValue = "3") int limit) {
+        UUID userId = SecurityUtil.getAuthenticatedUserId(userRepository);
+        int safeLimit = Math.max(1, Math.min(limit, 20));
+        return ResponseEntity.ok(transactionService.getUserTransactions(userId).stream()
+                .limit(safeLimit)
+                .map(DtoUtil::toResponse)
+                .toList());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getTransaction(@PathVariable("id") UUID id) {
         UUID userId = SecurityUtil.getAuthenticatedUserId(userRepository);

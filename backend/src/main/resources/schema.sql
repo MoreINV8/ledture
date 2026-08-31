@@ -13,8 +13,13 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS categories (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    label VARCHAR(20) NOT NULL UNIQUE
+    label VARCHAR(20) NOT NULL UNIQUE,
+    emoji VARCHAR(32) NOT NULL DEFAULT '🏷️'
 );
+
+-- Keep existing databases compatible when schema.sql runs after an upgrade.
+ALTER TABLE categories
+    ADD COLUMN IF NOT EXISTS emoji VARCHAR(32) NOT NULL DEFAULT '🏷️';
 
 
 -- Transactions table

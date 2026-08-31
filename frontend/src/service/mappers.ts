@@ -6,10 +6,9 @@ const DEFAULT_CATEGORY_ICON = '🏷️';
 const DEFAULT_CATEGORY_TYPE = 'E';
 
 /**
- * Map a backend category DTO (`{ id, label }`) to the UI `Category` shape.
- * The backend only stores an id + label, so the icon and income/expense type
- * are recovered from the known local categories by label, falling back to
- * sensible defaults for unknown categories.
+ * Map the backend category DTO to the UI shape. The emoji now comes from the
+ * database; transaction type remains frontend metadata until it is modeled by
+ * the category API.
  */
 export const mapCategory = (dto: CategoryDto): Category => {
   const known = INITIAL_CATEGORIES.find(
@@ -18,7 +17,7 @@ export const mapCategory = (dto: CategoryDto): Category => {
   return {
     id: dto.id,
     label: dto.label,
-    icon: known?.icon ?? DEFAULT_CATEGORY_ICON,
+    icon: dto.emoji || known?.icon || DEFAULT_CATEGORY_ICON,
     type: known?.type ?? DEFAULT_CATEGORY_TYPE,
   };
 };

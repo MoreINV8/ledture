@@ -16,6 +16,7 @@ export interface AuthRequestDto {
 export interface CategoryDto {
   id: string;
   label: string;
+  emoji: string;
 }
 
 /* ------------------------------ Transactions ------------------------------ */

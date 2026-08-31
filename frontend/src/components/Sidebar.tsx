@@ -6,12 +6,13 @@ import {
   BarChart3,
   User as UserIcon,
   Lock,
+  LogOut,
   Menu,
   X,
 } from "lucide-react";
 import type { ActiveTab, User } from "../types";
 import { APP_NAME, APP_TAGLINE } from "../constants";
-import { Button, Badge, Card } from "./ui";
+import { Button, Badge, Card } from ".";
 
 export interface SidebarProps {
   activeTab: ActiveTab;
@@ -21,6 +22,8 @@ export interface SidebarProps {
   isEditable: boolean;
   /** Number of transactions, shown as a badge next to "Transactions". */
   transactionCount?: number;
+  onLogout: () => void;
+  isLoggingOut?: boolean;
 }
 
 const NAV_ITEMS: Array<{
@@ -53,6 +56,8 @@ export const Sidebar: FC<SidebarProps> = ({
   user,
   isEditable,
   transactionCount = 0,
+  onLogout,
+  isLoggingOut = false,
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -134,6 +139,19 @@ export const Sidebar: FC<SidebarProps> = ({
             );
           })}
         </nav>
+      </div>
+
+      <div className="px-3 pb-1">
+        <Button
+          variant="outline"
+          size="lg"
+          icon={<LogOut className="w-4 h-4" />}
+          onClick={onLogout}
+          disabled={isLoggingOut}
+          className="w-full justify-center text-slate-400 hover:text-rose-300"
+        >
+          {isLoggingOut ? "Signing out…" : "Sign out"}
+        </Button>
       </div>
 
       {/* Business Rule Warning Note */}

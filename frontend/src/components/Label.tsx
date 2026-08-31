@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { cn } from '../../utils/cn';
+import type { ReactNode } from "react";
+import { cn } from "../utils/cn";
 
 export interface LabelProps {
   htmlFor?: string;
@@ -25,7 +25,7 @@ export const Label = ({
   <label
     htmlFor={htmlFor}
     className={cn(
-      'text-xs font-medium text-slate-400 flex items-center justify-between',
+      "text-xs font-medium text-slate-400 flex items-center justify-between",
       className,
     )}
   >
@@ -34,7 +34,11 @@ export const Label = ({
       {required && <span className="text-rose-400"> *</span>}
     </span>
     {hint && (
-      <span className={cn('text-[10px] text-slate-500 font-mono', hintClassName)}>{hint}</span>
+      <span
+        className={cn("text-[10px] text-slate-500 font-mono", hintClassName)}
+      >
+        {hint}
+      </span>
     )}
   </label>
 );

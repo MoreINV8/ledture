@@ -5,14 +5,14 @@ export interface FormatCurrencyOptions {
   decimals?: number;
 }
 
-/** Format a number as a currency string, e.g. `+$45.50`, `-$12.00`. */
+/** Format a number as a baht currency string, e.g. `+฿45.50`, `-฿12.00`. */
 export const formatCurrency = (
   amount: number,
   { sign = true, decimals = 2 }: FormatCurrencyOptions = {},
 ): string => {
   const value = Math.abs(amount).toFixed(decimals);
   const prefix = amount >= 0 ? (sign ? '+' : '') : '-';
-  return `${prefix}$${value}`;
+  return `${prefix}฿${value}`;
 };
 
 /** Format a value as a percentage string, e.g. `42.5%`. */

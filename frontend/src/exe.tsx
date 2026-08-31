@@ -48,9 +48,6 @@ import type {
   YearlyDetail,
 } from './types';
 
-// Re-export shared types so consumers of this module keep the same API.
-export * from './types';
-
 const generateMockTransactions = (): Transaction[] => {
   const today = new Date();
   const currentYear = today.getFullYear();

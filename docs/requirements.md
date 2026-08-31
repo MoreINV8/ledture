@@ -42,7 +42,8 @@ The system shall have a Category entity.
 **Each category contains:**
 
 id</br>
-label
+label</br>
+emoji
 
 **For the initial version:**
 
@@ -53,6 +54,7 @@ A transaction can have zero or one category.</br>
 categoryId is optional.</br>
 If no category is provided, the transaction's category is null.</br>
 Category labels must be unique.
+Each category must have an emoji for visual identification.</br>
 
 ! Category management through the application may be considered in a future version.
 

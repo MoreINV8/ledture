@@ -85,6 +85,17 @@
 400 BAD_REQUEST
 401 UNAUTHORIZED
 
+### GET /api/transactions/recent?limit=3
+
+Returns the authenticated user's newest transactions. `limit` defaults to 3
+and is constrained to the range 1–20.
+
+**Success:**
+200 OK
+
+**Errors:**
+401 UNAUTHORIZED
+
 ## Users API
 
 ### POST /api/auth/register
@@ -120,9 +131,24 @@
 **Business Rules:**
 - clear login session
 
+### GET /api/auth/session
+
+Returns the authenticated user's email when the server-side session is active.
+
+**Success:**
+200 OK
+
+**Errors:**
+401 UNAUTHORIZED
+
 ## Categories API
 
 ### GET /api/categories
+
+**Response item:**
+- id: UUID
+- label: string
+- emoji: string
 
 **Success:**
 200 OK

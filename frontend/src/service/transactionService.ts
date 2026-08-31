@@ -21,6 +21,13 @@ export const transactionService = {
     return mapTransactions(dtos);
   },
 
+  /** List the newest transactions for the Quick Note activity feed. */
+  async listRecent(limit = 3): Promise<Transaction[]> {
+    const safeLimit = Math.max(1, Math.min(limit, 20));
+    const dtos = await get<TransactionDto[]>(`/transactions/recent?limit=${safeLimit}`);
+    return mapTransactions(dtos);
+  },
+
   async get(id: string): Promise<Transaction> {
     const dto = await get<TransactionDto>(`/transactions/${id}`);
     return mapTransaction(dto);
