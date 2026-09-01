@@ -14,6 +14,9 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
+        env:
+            BASE_API_URL: ${{ vars.BASE_API_URL }}
+
         steps:
         -   name: Checkout
             uses: actions/checkout@v6
@@ -27,12 +30,12 @@ jobs:
             working-directory: frontend
             run: npm ci
 
-        -   run: echo ${{ env.BASE_API_URL }} ${{ vars.BASE_API_URL }}
+        -   name: Create .env file
+            working-directory: frontend
+            run: echo "VITE_BASE_API_URL=$BASE_API_URL" > .env
 
         -   name: Build
             working-directory: frontend
-            env:
-                VITE_BASE_API_URL: ${{ env.BASE_API_URL }}
             run: npm run build
 
         -   name: Setup Pages
