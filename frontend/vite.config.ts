@@ -14,7 +14,7 @@ export default defineConfig({
     // frontend can use relative `/api/...` URLs without CORS issues.
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: process.env.BASE_API_URL,
         changeOrigin: true,
       },
     },
