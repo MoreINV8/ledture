@@ -12,6 +12,9 @@ export default ({}) => {
   return defineConfig({
     plugins: [react(), tailwindcss()],
     base: "/ledture/",
+    define: {
+      __BASE_API_URL__: JSON.stringify(apiUrl)
+    },
     server: {
       // Forward API calls to the Spring Boot backend during development so the
       // frontend can use relative `/api/...` URLs without CORS issues.
