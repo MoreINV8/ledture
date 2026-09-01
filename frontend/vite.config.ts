@@ -12,7 +12,7 @@ export default ({}) => {
       // frontend can use relative `/api/...` URLs without CORS issues.
       proxy: {
         "/api": {
-          target: "https://ledture-be-903740308007.asia-southeast3.run.app",
+          target: process.env.VITE_BACKEND_API_URL,
           changeOrigin: true,
         },
       },
