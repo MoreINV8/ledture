@@ -29,6 +29,8 @@ jobs:
 
         -   name: Build
             working-directory: frontend
+            env:
+                BASE_API_URL: ${{ vars.BASE_API_URL }}
             run: npm run build
 
         -   name: Setup Pages
