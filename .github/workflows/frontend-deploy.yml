@@ -34,8 +34,7 @@ jobs:
             working-directory: frontend
             run: echo "VITE_BASE_API_URL=$BASE_API_URL" > .env && ls -la && echo $PWD
 
-        -   working-directory: fontend
-            run: cat .env
+        -   run: cat frontend/.env
 
         -   name: Build
             working-directory: frontend
