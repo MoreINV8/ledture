@@ -1,7 +1,9 @@
 name: Frontend Deployment
 
 on:
-    release:
+    push:
+        tags:
+            - 'v*'
 
 jobs:
     build:
