@@ -10,9 +10,8 @@ import {
   UserPlus,
 } from "lucide-react";
 
-import { APP_NAME, APP_TAGLINE } from "../constants";
 import { ApiError, authService } from "../service";
-import { Button, Card, Input, Label, Toast } from "../components";
+import { BrandLogo, Button, Card, Input, Label, Toast } from "../components";
 
 export interface SignupPageProps {
   onRegistered: (email: string) => void;
@@ -94,13 +93,7 @@ const SignupPage = ({ onRegistered, onShowLogin }: SignupPageProps) => {
 
       <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-md flex-col justify-center">
         <div className="mb-7 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-2xl font-black text-slate-950 shadow-lg shadow-emerald-500/20">
-            L
-          </div>
-          <h1 className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-2xl font-bold tracking-tight text-transparent">
-            {APP_NAME}
-          </h1>
-          <p className="mt-1 font-mono text-xs text-slate-500">{APP_TAGLINE}</p>
+          <BrandLogo className="mx-auto w-14 md:w-64" />
         </div>
 
         <Card className="p-6 shadow-2xl shadow-slate-950/50 sm:p-8">

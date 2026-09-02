@@ -5,3 +5,4 @@ export { Label, type LabelProps } from './Label';
 export { Badge, type BadgeProps, type BadgeVariant } from './Badge';
 export { Card, type CardProps } from './Card';
 export { Toast, type ToastProps } from './Toast';
+export { BrandLogo, type BrandLogoProps } from './BrandLogo';

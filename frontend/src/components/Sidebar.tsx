@@ -11,8 +11,7 @@ import {
   X,
 } from "lucide-react";
 import type { ActiveTab, User } from "../types";
-import { APP_NAME, APP_TAGLINE } from "../constants";
-import { Button, Badge, Card } from ".";
+import { Button, Badge, BrandLogo, Card } from ".";
 
 export interface SidebarProps {
   activeTab: ActiveTab;
@@ -70,19 +69,8 @@ export const Sidebar: FC<SidebarProps> = ({
   /** Brand block (logo + name) reused by the mobile bar, drawer and desktop aside. */
   const renderBrand = (extra?: ReactNode) => (
     <div className="p-2 md:p-6 flex items-center justify-between gap-3 border-b border-slate-800/60">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20">
-          L
-        </div>
-
-        {extra != null ? (
-          <div>
-            <h1 className="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              {APP_NAME}
-            </h1>
-            <p className="text-xs text-slate-400 font-mono">{APP_TAGLINE}</p>
-          </div>
-        ) : null}
+      <div className="flex min-w-0 items-center gap-3 md:w-full">
+        <BrandLogo className="w-10 md:w-full" />
       </div>
       {extra}
     </div>
