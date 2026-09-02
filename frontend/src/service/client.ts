@@ -8,8 +8,9 @@
  */
 
 /** Backend base URL. Override with `VITE_API_BASE_URL`, defaults to the Vite proxy. */
+const BACKEND_API_URL: string = (import.meta.env.VITE_BACKEND_API_URL as string | undefined) ?? '';
 export const API_BASE_URL: string =
-  (import.meta.env.VITE_BACKEND_API_URL as string | undefined) ?? '/api';
+  BACKEND_API_URL + '/api';
 
 export interface ApiErrorPayload {
   error?: string;
