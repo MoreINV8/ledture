@@ -17,10 +17,6 @@ CREATE TABLE IF NOT EXISTS categories (
     emoji VARCHAR(32) NOT NULL DEFAULT '🏷️'
 );
 
--- Keep existing databases compatible when schema.sql runs after an upgrade.
-ALTER TABLE categories
-    ADD COLUMN IF NOT EXISTS emoji VARCHAR(32) NOT NULL DEFAULT '🏷️';
-
 
 -- Transactions table
 
