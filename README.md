@@ -2,7 +2,7 @@
 
 > **Ledger for the future** — a personal income and expense tracker designed for fast, everyday transaction recording.
 
-### [💸 Access Web Application](https://moreinv8.github.io/ledture/)
+### [💸 Access Web Application](https://ledture.moreinv8.com)
 
 Ledture helps users record money as soon as it moves, instead of trying to reconstruct their spending at the end of the day. The shortest entry flow requires only an amount and a transaction type; a date, category, and note can be added when needed.
 
