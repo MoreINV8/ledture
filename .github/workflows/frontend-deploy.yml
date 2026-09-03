@@ -36,6 +36,9 @@ jobs:
 
         -   run: cat frontend/.env
 
+        -   name: Clean dist
+            run: rm -rf dist
+
         -   name: Build
             working-directory: frontend
             run: npm run build
