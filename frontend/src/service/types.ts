@@ -17,6 +17,7 @@ export interface CategoryDto {
   id: string;
   label: string;
   emoji: string;
+  type: ApiType;
 }
 
 /* ------------------------------ Transactions ------------------------------ */

@@ -17,6 +17,9 @@ public class Category {
     @Column(name = "emoji", length = 32, nullable = false)
     private String emoji;
 
+    @Column(name = "type", length = 1, nullable = false)
+    private String type; // 'I' for income, 'E' for expense
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions = new ArrayList<>();
 
@@ -25,11 +28,19 @@ public class Category {
     public Category(String label) {
         this.label = label;
         this.emoji = "🏷️";
+        this.type = "E";
     }
 
     public Category(String label, String emoji) {
         this.label = label;
         this.emoji = emoji;
+        this.type = "E";
+    }
+
+    public Category(String label, String emoji, String type) {
+        this.label = label;
+        this.emoji = emoji;
+        this.type = type;
     }
 
     // getters and setters
@@ -39,6 +50,8 @@ public class Category {
     public void setLabel(String label) { this.label = label; }
     public String getEmoji() { return emoji; }
     public void setEmoji(String emoji) { this.emoji = emoji; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
     public List<Transaction> getTransactions() { return transactions; }
     public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }

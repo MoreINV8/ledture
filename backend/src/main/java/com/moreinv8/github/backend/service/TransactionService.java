@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moreinv8.github.backend.exception.BusinessException;
+import com.moreinv8.github.backend.model.Category;
 import com.moreinv8.github.backend.model.Transaction;
 import com.moreinv8.github.backend.model.User;
 import com.moreinv8.github.backend.repository.CategoryRepository;
@@ -41,6 +42,15 @@ public class TransactionService {
                 .orElseThrow(() -> new BusinessException("User not found"));
     }
 
+    private Category fetchCategoryForType(UUID categoryId, String transactionType) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new BusinessException("Category not found"));
+        if (!category.getType().equals(transactionType)) {
+            throw new BusinessException("Category type must match transaction type");
+        }
+        return category;
+    }
+
     @Transactional
     public Transaction createTransaction(UUID userId, BigDecimal amount, String type,
                                          LocalDate transactionDate, String note,
@@ -64,9 +74,7 @@ public class TransactionService {
         transaction.setUser(user);
 
         if (categoryId != null) {
-            var category = categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new BusinessException("Category not found"));
-            transaction.setCategory(category);
+            transaction.setCategory(fetchCategoryForType(categoryId, type));
         }
 
         return transactionRepository.save(transaction);
@@ -106,9 +114,7 @@ public class TransactionService {
             transaction.setNote(note);
         }
         if (categoryId != null) {
-            var category = categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new BusinessException("Category not found"));
-            transaction.setCategory(category);
+            transaction.setCategory(fetchCategoryForType(categoryId, transaction.getType()));
         } else {
             transaction.setCategory(null);
         }

@@ -193,7 +193,7 @@ export const QuickNote: FC<QuickNoteProps> = ({
               variant={quickType === "I" ? "income" : "ghost"}
               size="lg"
               icon={<ArrowUpRight className="w-4 h-4 stroke-[3]" />}
-              onClick={() => setQuickType("I")}
+              onClick={() => { setQuickType("I"); setQuickCategory(""); }}
               className="py-3 rounded-lg text-sm"
             >
               <span>Income</span>
@@ -203,7 +203,7 @@ export const QuickNote: FC<QuickNoteProps> = ({
               variant={quickType === "E" ? "expense" : "ghost"}
               size="lg"
               icon={<ArrowDownRight className="w-4 h-4 stroke-[3]" />}
-              onClick={() => setQuickType("E")}
+              onClick={() => { setQuickType("E"); setQuickCategory(""); }}
               className="py-3 rounded-lg text-sm"
             >
               <span>Expense</span>

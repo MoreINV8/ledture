@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS categories (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     label VARCHAR(20) NOT NULL UNIQUE,
-    emoji VARCHAR(32) NOT NULL DEFAULT '🏷️'
+    emoji VARCHAR(32) NOT NULL DEFAULT '🏷️',
+    type CHAR(1) NOT NULL CHECK (type IN ('I', 'E'))
 );
 
 

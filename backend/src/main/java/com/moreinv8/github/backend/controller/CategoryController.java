@@ -24,11 +24,13 @@ public class CategoryController {
         public java.util.UUID id;
         public String label;
         public String emoji;
+        public String type;
         public static CategoryResponse from(Category c) {
             CategoryResponse r = new CategoryResponse();
             r.id = c.getId();
             r.label = c.getLabel();
             r.emoji = c.getEmoji();
+            r.type = c.getType();
             return r;
         }
     }

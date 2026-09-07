@@ -1,26 +1,14 @@
 import type { Category, Transaction } from '../types';
-import { INITIAL_CATEGORIES } from '../constants';
 import type { CategoryDto, TransactionDto, TransactionRequestDto } from './types';
 
 const DEFAULT_CATEGORY_ICON = '🏷️';
-const DEFAULT_CATEGORY_TYPE = 'E';
-
-/**
- * Map the backend category DTO to the UI shape. The emoji now comes from the
- * database; transaction type remains frontend metadata until it is modeled by
- * the category API.
- */
-export const mapCategory = (dto: CategoryDto): Category => {
-  const known = INITIAL_CATEGORIES.find(
-    (c) => c.label.toLowerCase() === dto.label.toLowerCase(),
-  );
-  return {
-    id: dto.id,
-    label: dto.label,
-    icon: dto.emoji || known?.icon || DEFAULT_CATEGORY_ICON,
-    type: known?.type ?? DEFAULT_CATEGORY_TYPE,
-  };
-};
+/** Map the backend category DTO to the UI shape. */
+export const mapCategory = (dto: CategoryDto): Category => ({
+  id: dto.id,
+  label: dto.label,
+  icon: dto.emoji || DEFAULT_CATEGORY_ICON,
+  type: dto.type,
+});
 
 export const mapCategories = (dtos: CategoryDto[]): Category[] => dtos.map(mapCategory);
 

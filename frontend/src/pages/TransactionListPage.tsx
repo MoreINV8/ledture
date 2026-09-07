@@ -439,8 +439,8 @@ export const TransactionList: FC<TransactionListProps> = ({
             </div>
             <form noValidate onSubmit={(event: FormEvent<HTMLFormElement>) => { event.preventDefault(); void handleUpdateTransaction(editingTransaction); }} className="space-y-4">
               <div className="grid grid-cols-2 gap-2">
-                <Button type="button" variant={editingTransaction.type === "I" ? "income" : "outline"} size="md" onClick={() => setEditingTransaction({ ...editingTransaction, type: "I" })} className="py-2 rounded-lg text-xs">Income</Button>
-                <Button type="button" variant={editingTransaction.type === "E" ? "expense" : "outline"} size="md" onClick={() => setEditingTransaction({ ...editingTransaction, type: "E" })} className="py-2 rounded-lg text-xs">Expense</Button>
+                <Button type="button" variant={editingTransaction.type === "I" ? "income" : "outline"} size="md" onClick={() => setEditingTransaction({ ...editingTransaction, type: "I", categoryId: null })} className="py-2 rounded-lg text-xs">Income</Button>
+                <Button type="button" variant={editingTransaction.type === "E" ? "expense" : "outline"} size="md" onClick={() => setEditingTransaction({ ...editingTransaction, type: "E", categoryId: null })} className="py-2 rounded-lg text-xs">Expense</Button>
               </div>
               <div>
                 <Label htmlFor="edit-amount">Amount (฿)</Label>
